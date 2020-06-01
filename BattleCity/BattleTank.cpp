@@ -13,6 +13,7 @@ Keyboard::Keyboard()
 	downIsPressed = false;
 	leftIsPressed = false;
 	rightIsPressed = false;
+	numpad0IsPressed = false;
 	rctrlIsPressed = false;
 	rshiftIsPressed = false;
 
@@ -31,6 +32,7 @@ Keyboard::Keyboard()
 	downIsReleased = false;
 	leftIsReleased = false;
 	rightIsReleased = false;
+	numpad0IsReleased = false;
 	rctrlIsReleased = false;
 	rshiftIsReleased = false;
 
@@ -87,6 +89,11 @@ void Keyboard::OnLeftPressed()
 void Keyboard::OnRightPressed()
 {
 	rightIsPressed = true;
+}
+
+void Keyboard::OnNumpad0Pressed()
+{
+	numpad0IsPressed = true;
 }
 
 void Keyboard::OnRightCtrlPressed()
@@ -168,6 +175,10 @@ void Keyboard::OnRightReleased()
 {
 	rightIsPressed = false;
 }
+void Keyboard::OnNumpad0Released()
+{
+	numpad0IsPressed = false;
+}
 
 void Keyboard::OnRightCtrlReleased()
 {
@@ -245,6 +256,11 @@ bool Keyboard::IsRightPressed() const
 	return this->rightIsPressed;
 }
 
+bool Keyboard::IsNumpad0Pressed() const 
+{
+	return this->numpad0IsPressed;
+}
+
 bool Keyboard::IsRightCtrlPressed() const
 {
 	return this->rctrlIsPressed;
@@ -268,7 +284,7 @@ bool Keyboard::IsEscPressed() const
 	return this->escIsPressed;
 }
 
-Tank::Tank(): bullet(1)
+Tank::Tank(): bullet(1), m_pTexture(4, NULL)
 {
 	direction = 3;
 	isEnemy = 1;
@@ -285,7 +301,7 @@ Tank::Tank(): bullet(1)
 	appear_time = 0;
 }
 
-Tank::Tank(bool isEnemy, D2D1_RECT_F pos, int _health) : bullet(1)
+Tank::Tank(bool isEnemy, D2D1_RECT_F pos, int _health) : bullet(1), m_pTexture(4, NULL)
 {
 	direction = 0;
 	isEnemy = 0;
@@ -302,6 +318,9 @@ Tank::Tank(bool isEnemy, D2D1_RECT_F pos, int _health) : bullet(1)
 	appear_time = 0;
 }
 
+
+
+/*
 void Tank::MoveReset()
 {
 	MoveUp = 0;
@@ -349,6 +368,7 @@ void Tank::MoveTankRight()
 		this->position.right += MOVEMENT_SPEED;
 	}
 }
+*/
 
 void Tank::MoveTankUpPixel(float pixel)
 {
@@ -390,6 +410,16 @@ void Tank::MoveTankRightPixel(float pixel)
 	}
 }
 
+int Tank::GetDirection() const
+{
+	return this->direction;
+}
+
+D2D1_RECT_F Tank::GetPosition() const
+{
+	return this->position;
+}
+
 Bullet::Bullet()
 {
 	direction = 0;
@@ -401,8 +431,8 @@ Bullet::Bullet(Tank tank, int bullet_level, int bullet_speed)
 {
 	this->level = bullet_level;
 	this->bullet_speed = bullet_speed;
-	direction = tank.direction;
-	position = tank.position;
+	direction = tank.GetDirection();
+	position = tank.GetPosition();
 	if (direction == 1)	//left
 	{
 		position.left -= 10;

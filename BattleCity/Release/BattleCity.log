@@ -1,7 +1,6 @@
-﻿  Game_main.cpp
+﻿  BattleTank.cpp
+  Game_main.cpp
   正在生成代码
-  5 of 222 functions ( 2.3%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    2 functions had inline decision re-evaluated but remain unchanged
+  All 1016 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   已完成代码的生成
-  BattleCity.vcxproj -> F:\NathanDrake_Projects\Codes\DirectX\BattleCity\Release\BattleCity.exe
+  BattleCity.vcxproj -> F:\NathanDrake_Projects\Cpp\DirectX\BattleCity\Release\BattleCity.exe
